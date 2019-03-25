@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+/home/tonystark/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2484437400.index
+1771379603.index
+1825587823.index
+1020796705.index
+746163550.index
+1922020610.index
+3653104192.index
+3507378999.index

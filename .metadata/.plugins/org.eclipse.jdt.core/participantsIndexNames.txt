@@ -1,0 +1,9 @@
+INDEX VERSION 1.131
+/home/tonystark/eclipse-workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1781482085.index
+/TestProject/src
+/home/tonystark/eclipse-workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/489268783.index
+/HelloWorld/src
+/home/tonystark/eclipse-workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3341132548.index
+/Enssat2/src
+/home/tonystark/eclipse-workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1871572252.index
+/Enssat/src
