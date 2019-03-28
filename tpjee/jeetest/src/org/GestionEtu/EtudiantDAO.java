@@ -19,4 +19,13 @@ public interface EtudiantDAO {
 	 * @return a list of student whose name contains searchText
 	 */
 	List<Etudiant> findByName(String searchText);
+
+	/**
+	 * find by whose id contains an int
+	 *
+	 * @param searchId
+	 *            the pattern to search
+	 * @return a list of student whose id contains searchId
+	 */
+	Etudiant findById(int searchId);
 }

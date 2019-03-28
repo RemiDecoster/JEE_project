@@ -52,9 +52,9 @@ public class Etudiant {
 		this.id = id;
 		this.prenom = p;
 		this.nom = n;
-		this.dateBac = d1;
-		this.dateDiplome = d2;
-		this.dateNaissance = d3;
+		this.dateNaissance = d1;
+		this.dateBac = d2;
+		this.dateDiplome = d3;
 		this.pro = cpro;
 		this.perso = cper;
 		this.bac = s;

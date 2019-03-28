@@ -37,9 +37,9 @@ public class EtudiantDAOImpl implements EtudiantDAO {
 					int id = rs.getInt("id");
 					String prenom = rs.getString("prenom");
 					String nom = rs.getString("nom");
-					Date d1 = rs.getDate("dateBac");
-					Date d2 = rs.getDate("dateDiplome");
-					Date d3 = rs.getDate("dateNaissance");
+					Date d2 = rs.getDate("dateBac");
+					Date d3 = rs.getDate("dateDiplome");
+					Date d1 = rs.getDate("dateNaissance");
 					String cp = rs.getString("pro");
 					String c = rs.getString("perso");
 					String s = rs.getString("bac");
@@ -67,13 +67,23 @@ public class EtudiantDAOImpl implements EtudiantDAO {
 		// avoid select * queries because of performance issues,
 		// only query the columns you need
 		return findBy("select id,prenom, nom, d1, d2, d3, cp, c, s, m, d, v from students");
+		//TODO corriger avec les bons parametres de la BDD
 	}
 
 	// recherche l'etudiant par son prenom (pas son nom)
 	public List<Etudiant> findByName(String searchText) {
 		// watch out : this query is case sensitive. use upper function on title
 		// and searchText to make it case insensitive
-		return findBy("select id,prenom, nom, d1, d2, d3, cp, c, s, m, d, v from books where prenom like '%" + searchText + "%'");
+		return findBy("select id,prenom, nom, d1, d2, d3, cp, c, s, m, d, v from students where prenom like '%" + searchText + "%'");
 
 	}
+
+	public Etudiant findById(int searchId) {
+		// watch out : this query is case sensitive. use upper function on title
+		// and searchText to make it case insensitive
+		List<Etudiant> tab;
+		tab = findBy("select id,prenom, nom, d1, d2, d3, cp, c, s, m, d, v from students where id like '%" + searchId + "%'");
+	return tab.get(0);
+	}
+
 }
