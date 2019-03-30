@@ -1,1 +1,0 @@
-INDEX VERSION 1.126+/users/elo/rdecoste/Documents/2a/web/client-serveur/project/tpjee/Enssat2/.metadata/.plugins/org.eclipse.jdt.core
