@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.List,org.tutorial.Book"%>
+<%@page import="java.util.List,org.GestionEtu.Etudiant"%>
 <%
-List<Book> listBooks = (List<Book>)request.getAttribute("listBooks");
+List<Etudiant> listBooks = (List<Etudiant>)request.getAttribute("listBooks");
 String searchText = request.getParameter("searchText");
 %>
 
@@ -27,12 +27,12 @@ String searchText = request.getParameter("searchText");
 				<th>Titre</th>
 				<th>Auteur</th>
 			</tr>
-			<%for (Book book:listBooks) {String title = book.getTitle();
-			String author = book.getAuthor();%>
+			<%for (Etudiant book:listBooks) {String title = book.getNom();
+			String author = book.getPrenom();%>
 			<tr>
 				<td><%=title %></td>
 				<td><%=author %></td>
-			</tr>
+			</tr>Author
 			<%}%>
 		</table>
 		<% } %>
