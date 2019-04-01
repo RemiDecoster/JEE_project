@@ -420,7 +420,7 @@ public class GestionBDD {
 	}
 
 	/**
-	 * deleteEtu : supprime dans la BDD un groupe
+	 * deleteGroup : supprime dans la BDD un groupe
 	 * @param request
 	 * @return succes/echec
 	 */
@@ -479,8 +479,140 @@ public class GestionBDD {
 
 
 
-	//TODO Les (14-1) fonctions pour changer les attributs des étudiants,
+	//TODO Les (14-1) fonctions pour changer les attributs des étudiants, (1 done)
 	//TODO (5-1) pour changer les attributs des groupes (y compris la liste d'étudiants) et les 3 pour ceux d'un utlisateur CONNECTE
+
+
+	// Etudiants fonctions de modification
+
+	public void changePrenom(HttpServletRequest request) {
+		Connection connexion = null;
+		PreparedStatement statement = null;
+		String numetudiant = (String) request.getParameter("numetudiant");
+		String prenom = (String) request.getParameter("prenom");
+		try {
+			connexion = (Connection) DBManager.getInstance().getConnection();
+			statement = (PreparedStatement) connexion.prepareStatement("Update Etudiants set prenom = ? where numetudiant = ? ;");
+			statement.setString(1, prenom);
+			statement.setString(2, numetudiant);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	// Groupes fonctions de modification
+
+
+	/**
+	 * addEtuInGroup : ajoute dans un groupe de la BDD un etudiant
+	 * @param request
+	 */
+
+	//TODO
+	public void addEtuInGroup( HttpServletRequest request) {
+		Connection connexion = null;
+		PreparedStatement statement = null;
+		String numetudiant = (String) request.getParameter("numetudiant");
+		String idgroupe = (String) request.getParameter("idGroupe");
+		try {
+			connexion = (Connection) DBManager.getInstance().getConnection();
+			statement = (PreparedStatement) connexion.prepareStatement("Insert Into ListeEtudiants values (?,?);");
+			statement.setString(1, numetudiant);
+			statement.setString(2, idgroupe);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+	}
+
+
+	/**
+	 * addEtuInGroup : ajoute dans un groupe de la BDD un etudiant
+	 * @param request
+	 */
+
+	//TODO
+	public void addGroupInGroup( HttpServletRequest request) {
+		Connection connexion = null;
+		PreparedStatement statement = null;
+		String idGroup = (String) request.getParameter("idGroup");  //TODO a voir si ok
+		String idGroupeOut = (String) request.getParameter("idGroupeOut");
+
+		try {
+			connexion = (Connection) DBManager.getInstance().getConnection();
+														//maj	 //selection des etudiants a ajouter puis mise à jour de leur appartenance au groupe
+			String query = "Insert Into ListeEtudiants ( update (select * from ListeEtudiants where idGroupe = ?  and numetudiant not in " +
+																	"(select * from ListeEtudiant where idGroup != ?)" +
+														") set idGroupe = ?);";
+			statement = (PreparedStatement) connexion.prepareStatement(query);
+			statement.setString(1, idGroupeOut);
+			statement.setString(2, idGroup);
+			statement.setString(3, idGroup);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * deleteEtu : supprime dans un groupe de la BDD un etudiant
+	 * @param request
+	 */
+
+	public void deleteEtuFromGroup( HttpServletRequest request) {
+		Connection connexion = null;
+		PreparedStatement statement = null;
+		String numetudiant = (String) request.getParameter("numetudiant");
+		String idgroupe = (String) request.getParameter("idGroupe");
+		try {
+			connexion = (Connection) DBManager.getInstance().getConnection();
+			statement = (PreparedStatement) connexion.prepareStatement("Delete From ListeEtudiants where numetudiant = ? and idGroupe = ? ;");
+			statement.setString(1, numetudiant);
+			statement.setString(2, idgroupe);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * deleteGroupFromGroup : supprime dans un groupe de la BDD un groupe
+	 * @param request
+	 */
+
+	public void deleteGroupFromGroup( HttpServletRequest request) {
+		Connection connexion = null;
+		PreparedStatement statement = null;
+		String idGroup = (String) request.getParameter("idGroup");  	 //TODO a voir si ok
+		String idGroupeOut = (String) request.getParameter("idGroupeOut");
+
+		try {
+			connexion = (Connection) DBManager.getInstance().getConnection();
+				 										//selection des etudiants a supprimer
+			String query = "delete from ListeEtudiants (select * from ListeEtudiants where idGroupe = ?  and numetudiant in " +
+					"(select * from ListeEtudiant where idGroup = ?)" +
+					") where idGroupe = ?;";
+			statement = (PreparedStatement) connexion.prepareStatement(query);
+			statement.setString(1, idGroupeOut);
+			statement.setString(2, idGroup);
+			statement.setString(3, idGroup);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+		// Users fonctions de modification
 
 	public void changeMDP(HttpServletRequest request) {
 		Connection connexion = null;
