@@ -74,7 +74,45 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
+-- -----------------------------------------------------
+-- Table `enssat_tp`.`Users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `enssat_tp`.`Users` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `enssat_tp`.`Users` (
+  `pseudo` VARCHAR(45) NOT NULL ,
+  `password` VARCHAR(45) NOT NULL ,
+  `question` VARCHAR(45) NULL ,
+  `answer` VARCHAR(45) NULL ,
+  `isEditor` TINYINT(1) NOT NULL DEFAULT 0 ,
+  `idAdmin` TINYINT(1) NOT NULL DEFAULT 0 ,
+  PRIMARY KEY (`pseudo`) )
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `enssat_tp`.`Etudiants`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `enssat_tp`;
+INSERT INTO `enssat_tp`.`Etudiants` (`numetudiant`, `nom`, `prenom`, `ddn`, `emailPro`, `emailPerso`, `bac`, `anBac`, `menBac`, `diplome`, `anDiplome`, `villeDiplome`, `S`, `inscription`) VALUES ('mrj', 'muto', 'yugi', '01/04/1995', 'yugi@kaibacorp.com', 'exodia@otk.com', 's', '2010', 'TB', 'duelMaster', '2012', 'Pegasus', 'M', '2011');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `enssat_tp`.`Users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `enssat_tp`;
+INSERT INTO `enssat_tp`.`Users` (`pseudo`, `password`, `question`, `answer`, `isEditor`, `idAdmin`) VALUES ('matt', 'hello', 'On dit merci qui ?', 'JMR', 1, 1);
+INSERT INTO `enssat_tp`.`Users` (`pseudo`, `password`, `question`, `answer`, `isEditor`, `idAdmin`) VALUES ('jojo', 'poker', 'Ma question perferée ?', 'Que vais-je faire de tout cet oseille?', 1, 0);
+INSERT INTO `enssat_tp`.`Users` (`pseudo`, `password`, `question`, `answer`, `isEditor`, `idAdmin`) VALUES ('remi', 'kebab', 'quelle sauce ?', 'sans sauce', 0, 0);
+INSERT INTO `enssat_tp`.`Users` (`pseudo`, `password`, `question`, `answer`, `isEditor`, `idAdmin`) VALUES ('adrien', 'dodo', 'quelle heure ?', '14h', 0, 1);
+
+COMMIT;
